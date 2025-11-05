@@ -27,6 +27,12 @@ const ClockIcon = () => (
     </svg>
 );
 
+const EquipmentIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500">
+        <path d="M14 12h8"></path><path d="M2 12h2"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M12 12a6 6 0 0 1-6-6h0a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0"></path><path d="M12 12a6 6 0 0 1-6 6h0a6 6 0 0 1 6 6h0a6 6 0 0 1 6-6v0"></path>
+    </svg>
+);
+
 const WorkoutListItem: React.FC<WorkoutListItemProps> = ({ workout, progress, onClick }) => {
   const { isNext, totalCompletions } = progress;
 
@@ -47,12 +53,18 @@ const WorkoutListItem: React.FC<WorkoutListItemProps> = ({ workout, progress, on
     >
       <div>
         <h4 className="font-bold text-lg text-white">{workout.name}</h4>
-        <div className="flex items-center gap-x-4 text-sm text-gray-400 mt-1">
-          <p className="flex-grow">{workout.info}</p>
-          <div className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0">
+        <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm text-gray-400 mt-1">
+          <p>{workout.info}</p>
+          <div className="flex items-center gap-1.5 whitespace-nowrap">
             <ClockIcon />
             <span>{workout.duration} min</span>
           </div>
+          {workout.equipment && (
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
+                <EquipmentIcon />
+                <span>{workout.equipment}</span>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex-shrink-0 ml-4">
