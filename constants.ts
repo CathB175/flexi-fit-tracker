@@ -8,26 +8,28 @@ const HIIT_WORKOUTS = Array.from({ length: 3 }, (_, cycleIndex) =>
     info: `Beginner HIIT from The Body Coach App. Find Cycle ${cycleIndex + 1}.`,
     duration: 20,
     link: 'https://www.youtube.com/c/thebodycoachtv',
+    equipment: 'None',
+    notes: 'Focus on explosive power and cardio.',
     cycle: cycleIndex + 1,
     session: sessionIndex + 1,
   }))
 ).flat();
 
 const YOGA_PILATES_WORKOUTS = [
-    { id: 'yoga_morning_flow', name: 'Morning Flow', category: 'yoga_pilates', info: 'Energising morning yoga session. From The Body Coach App.', duration: 15 },
-    { id: 'yoga_power', name: 'Power Yoga', category: 'yoga_pilates', info: 'A challenging yoga workout to build strength. From The Body Coach App.', duration: 30 },
-    { id: 'yoga_bedtime', name: 'Bedtime Yoga', category: 'yoga_pilates', info: 'A relaxing flow to wind down. From The Body Coach App.', duration: 10 },
-    { id: 'pilates_core', name: 'Core Pilates', category: 'yoga_pilates', info: 'Strengthen your core with this focused Pilates routine. From The Body Coach App.', duration: 20 },
-    { id: 'pilates_full_body', name: 'Full Body Pilates', category: 'yoga_pilates', info: 'A complete Pilates workout for the entire body. From The Body Coach App.', duration: 25 },
+    { id: 'yoga_morning_flow', name: 'Morning Flow', category: 'yoga_pilates', info: 'Energising morning yoga session. From The Body Coach App.', duration: 15, equipment: 'Yoga Mat' },
+    { id: 'yoga_power', name: 'Power Yoga', category: 'yoga_pilates', info: 'A challenging yoga workout to build strength. From The Body Coach App.', duration: 30, equipment: 'Yoga Mat', notes: 'Focus on holding poses to build heat.' },
+    { id: 'yoga_bedtime', name: 'Bedtime Yoga', category: 'yoga_pilates', info: 'A relaxing flow to wind down. From The Body Coach App.', duration: 10, equipment: 'Yoga Mat' },
+    { id: 'pilates_core', name: 'Core Pilates', category: 'yoga_pilates', info: 'Strengthen your core with this focused Pilates routine. From The Body Coach App.', duration: 20, equipment: 'Yoga Mat' },
+    { id: 'pilates_full_body', name: 'Full Body Pilates', category: 'yoga_pilates', info: 'A complete Pilates workout for the entire body. From The Body Coach App.', duration: 25, equipment: 'Yoga Mat' },
 ];
 
 const SMM_WORKOUTS = [
-    { id: 'smm_1', name: 'Daily Mobility Routine', category: 'smm_daily', info: 'Essential daily movements from SMM.', duration: 10 },
+    { id: 'smm_1', name: 'Daily Mobility Routine', category: 'smm_daily', info: 'Essential daily movements from SMM.', duration: 10, notes: 'Great for warm-ups or recovery.' },
     { id: 'smm_2', name: 'Hip Mobility Flow', category: 'smm_daily', info: 'Focus on opening up the hips with SMM.', duration: 15 },
     { id: 'smm_stability_1', name: 'Core Stability', category: 'smm_stability', info: 'Build a solid core foundation.', duration: 15 },
     { id: 'smm_stability_2', name: 'Single Leg Stability', category: 'smm_stability', info: 'Improve balance and control.', duration: 15 },
     { id: 'smm_spf_1', name: 'Shoulder Opening', category: 'smm_spf', info: 'Relieve shoulder tension with SPF.', duration: 10 },
-    { id: 'smm_spf_2', name: 'Posture Corrector', category: 'smm_spf', info: 'Exercises to improve your posture from SPF.', duration: 12 },
+    { id: 'smm_spf_2', name: 'Posture Corrector', category: 'smm_spf', info: 'Exercises to improve your posture from SPF.', duration: 12, equipment: 'Resistance Band (optional)', notes: 'Ideal for desk workers.' },
 ];
 
 export const DEFAULT_WORKOUT_DATA: WorkoutData = {
