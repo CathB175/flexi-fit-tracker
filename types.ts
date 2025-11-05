@@ -11,6 +11,8 @@ export interface Workout {
   info: string;
   duration: number; // in minutes
   link?: string;
+  notes?: string;
+  equipment?: string;
   // For HIIT
   cycle?: number;
   session?: number;
