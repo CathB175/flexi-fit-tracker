@@ -1,6 +1,6 @@
 // A simple CSV parser. Does not handle quotes or commas within fields.
 // Assumes the first line is the header.
-export function parseCsv(csvText: string): Record<string, string>[] {
+export function parseCsv(csvText: string, fileName: string): Record<string, string>[] {
   const lines = csvText.trim().split(/\r?\n/);
   if (lines.length < 2) {
     return []; // Return empty if no data rows
@@ -11,9 +11,10 @@ export function parseCsv(csvText: string): Record<string, string>[] {
 
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(',');
+    
+    // BUG FIX: Instead of silently ignoring bad rows, throw a specific error.
     if (values.length !== header.length) {
-      console.warn(`Row ${i} has a different number of columns than the header.`);
-      continue;
+      throw new Error(`In file '${fileName}', row ${i + 1} is invalid. Expected ${header.length} columns, but found ${values.length}. Please check for extra commas in your text.`);
     }
 
     const entry: Record<string, string> = {};
