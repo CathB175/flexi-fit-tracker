@@ -8,11 +8,13 @@ import WorkoutList from './components/WorkoutList';
 import WorkoutDetail from './components/WorkoutDetail';
 import DataManager from './components/DataManager';
 import CostAdvisory from './components/CostAdvisory';
+import Toast from './components/Toast';
 
 export default function App() {
   const { workoutData, setWorkoutData, resetToDefault } = useAppData();
   const { logs, addLog, getWorkoutProgress } = useWorkoutData(workoutData.workouts);
   const [view, setView] = useState<ViewState>({ type: 'home' });
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleSelectCategory = (category: WorkoutCategory) => {
     setView({ type: 'category', categoryId: category.id });
@@ -88,13 +90,13 @@ export default function App() {
             currentData={workoutData}
             onSave={(newData) => {
               setWorkoutData(newData);
-              alert('Your workout data has been updated!');
+              setToastMessage('Your workout data has been updated!');
               setView({ type: 'home' });
             }}
             onReset={() => {
               if (window.confirm('Are you sure you want to reset all workout data to the original defaults? This cannot be undone.')) {
                 resetToDefault();
-                alert('Workout data has been reset to default.');
+                setToastMessage('Workout data has been reset to default.');
                 setView({ type: 'home' });
               }
             }}
@@ -115,6 +117,7 @@ export default function App() {
       <main className="p-4 pb-20 max-w-4xl mx-auto">
         {renderContent()}
       </main>
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
     </div>
   );
 }
