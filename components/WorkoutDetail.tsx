@@ -22,6 +22,20 @@ const ClockIcon = () => (
     </svg>
 );
 
+const EquipmentIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+        <path d="M14 12h8"></path><path d="M2 12h2"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M12 12a6 6 0 0 1-6-6h0a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0"></path><path d="M12 12a6 6 0 0 1-6 6h0a6 6 0 0 1 6 6h0a6 6 0 0 1 6-6v0"></path>
+    </svg>
+);
+
+// Fix: Update NoteIcon to accept a className prop to fix a type error.
+const NoteIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={['text-gray-400', className].filter(Boolean).join(' ')}>
+        <path d="M8 6h8c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z"></path><path d="M16 4h2a2 2 0 0 1 2 2v2"></path><path d="M8 4H6a2 2 0 0 0-2 2v2"></path><path d="M16 20h2a2 2 0 0 0 2-2v-2"></path><path d="M8 20H6a2 2 0 0 1-2-2v-2"></path>
+    </svg>
+);
+
+
 const WorkoutDetail: React.FC<WorkoutDetailProps> = ({ workout, logs, addLog }) => {
   const [showLogForm, setShowLogForm] = useState(false);
 
@@ -40,17 +54,33 @@ const WorkoutDetail: React.FC<WorkoutDetailProps> = ({ workout, logs, addLog }) 
     <div className="space-y-6">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-brand-primary mb-2">{workout.name}</h2>
-        <div className="flex items-center gap-2 text-gray-300 mb-4 text-lg">
-            <ClockIcon />
-            <span className="font-semibold">{workout.duration} minutes (planned)</span>
-        </div>
         <p className="text-gray-300 mb-4">{workout.info}</p>
+        
+        <div className="space-y-3 border-t border-gray-700 pt-4 mt-4">
+            <div className="flex items-center gap-3 text-gray-300">
+                <ClockIcon />
+                <span className="font-semibold">{workout.duration} minutes (planned)</span>
+            </div>
+            {workout.equipment && (
+                 <div className="flex items-center gap-3 text-gray-300">
+                    <EquipmentIcon />
+                    <span className="font-semibold">{workout.equipment}</span>
+                </div>
+            )}
+            {workout.notes && (
+                 <div className="flex items-start gap-3 text-gray-300">
+                    <NoteIcon className="flex-shrink-0 mt-0.5" />
+                    <span className="italic">"{workout.notes}"</span>
+                </div>
+            )}
+        </div>
+        
         {workout.link && (
           <a
             href={workout.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-brand-light hover:text-brand-primary font-semibold transition-colors"
+            className="inline-flex items-center gap-2 text-brand-light hover:text-brand-primary font-semibold transition-colors mt-4"
           >
             <LinkIcon/>
             Find on YouTube/App
